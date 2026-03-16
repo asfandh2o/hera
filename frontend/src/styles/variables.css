@@ -1,0 +1,70 @@
+:root {
+  /* Sidebar */
+  --sidebar-bg: #0a0a0f;
+  --sidebar-width: 64px;
+  --sidebar-collapsed: 64px;
+  --sidebar-text: rgba(255, 255, 255, 0.4);
+  --sidebar-text-hover: rgba(255, 255, 255, 0.7);
+  --sidebar-text-active: #ffffff;
+  --sidebar-accent: #8b5cf6;
+
+  /* Header */
+  --header-height: 56px;
+  --header-bg: #0d0d14;
+  --header-border: rgba(255, 255, 255, 0.06);
+
+  /* Content */
+  --content-bg: #111118;
+  --card-bg: #16161e;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --card-radius: 10px;
+
+  /* Priority */
+  --priority-critical: #ef4444;
+  --priority-high: #f59e0b;
+  --priority-medium: #4a6cf7;
+  --priority-low: #94a3b8;
+
+  /* Status */
+  --status-pending: #94a3b8;
+  --status-assigned: #f59e0b;
+  --status-in-progress: #8b5cf6;
+  --status-done: #22c55e;
+
+  /* Typography */
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Accent */
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-light: rgba(139, 92, 246, 0.15);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* Project status */
+  --project-completed: #22c55e;
+  --project-in-progress: #8b5cf6;
+  --project-behind: #ef4444;
+  --project-not-started: #94a3b8;
+
+  /* Ticket types */
+  --ticket-bug: #ef4444;
+  --ticket-issue: #f59e0b;
+  --ticket-improvement: #22c55e;
+  --ticket-question: #3b82f6;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}

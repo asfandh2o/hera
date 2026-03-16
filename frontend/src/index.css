@@ -1,0 +1,27 @@
+@import './styles/variables.css';
+@import './styles/layout.css';
+@import './styles/components.css';
+@import './styles/board.css';
+@import './styles/gantt.css';
+@import './styles/login.css';
+@import './styles/orchestrate.css';
+@import './styles/projects.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0d0d14;
+  color: var(--text-primary);
+}
+
+#root {
+  min-height: 100vh;
+}

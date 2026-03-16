@@ -1,0 +1,279 @@
+/* Gantt chart - Timeline view */
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.timeline-controls .btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Gantt wrapper */
+.gantt-wrapper {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.gantt-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - var(--header-height) - 140px);
+}
+
+/* Gantt grid */
+.gantt-grid {
+  display: grid;
+  min-width: max-content;
+  position: relative;
+}
+
+/* Header cells (date labels) */
+.gantt-header-cell {
+  padding: 8px 4px;
+  text-align: center;
+  border-bottom: 2px solid var(--card-border);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 11px;
+  color: var(--text-muted);
+  user-select: none;
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 5;
+}
+
+.gantt-header-cell .day-number {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 13px;
+  display: block;
+}
+
+.gantt-header-cell .day-name {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gantt-header-cell.today {
+  background: var(--accent-light);
+}
+
+.gantt-header-cell.weekend {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Employee name column */
+.gantt-name-col {
+  position: sticky;
+  left: 0;
+  background: var(--card-bg);
+  z-index: 6;
+  border-right: 2px solid var(--card-border);
+  padding: 0;
+}
+
+.gantt-name-header {
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 7;
+}
+
+/* Employee row */
+.gantt-employee-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0 16px;
+  height: 48px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+}
+
+/* Row cells (day cells in employee row) */
+.gantt-cell {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-right: 1px solid rgba(255, 255, 255, 0.02);
+  height: 48px;
+  position: relative;
+}
+
+.gantt-cell.weekend {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.gantt-cell.today {
+  background: rgba(139, 92, 246, 0.04);
+}
+
+/* Task bar */
+.gantt-bar {
+  position: absolute;
+  top: 8px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 3;
+  overflow: hidden;
+  min-width: 30px;
+}
+
+.gantt-bar:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 4;
+}
+
+.gantt-bar.priority-critical { background: var(--priority-critical); color: white; }
+.gantt-bar.priority-high { background: var(--priority-high); color: white; }
+.gantt-bar.priority-medium { background: var(--priority-medium); color: white; }
+.gantt-bar.priority-low { background: var(--priority-low); color: white; }
+
+/* Done tasks — muted with strikethrough */
+.gantt-bar.status-done {
+  opacity: 0.45;
+  background: #94a3b8 !important;
+}
+.gantt-bar.status-done .gantt-bar-title {
+  text-decoration: line-through;
+}
+
+/* Active (in_progress) — subtle glow */
+.gantt-bar.status-active {
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.4);
+}
+
+/* Blocked task — diagonal stripes */
+.gantt-bar.status-blocked {
+  opacity: 0.6;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    rgba(0,0,0,0.1) 4px,
+    rgba(0,0,0,0.1) 8px
+  ) !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.4);
+}
+
+/* Overdue task — red glow + pulsing */
+.gantt-bar.status-overdue {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
+  animation: gantt-overdue-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gantt-overdue-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2); }
+}
+
+.gantt-bar-overdue-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: #ef4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.gantt-bar-title {
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Today line */
+.gantt-today-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.gantt-today-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Gantt tooltip */
+.gantt-tooltip {
+  position: fixed;
+  background: var(--sidebar-bg);
+  color: white;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px;
+  max-width: 280px;
+  z-index: 200;
+  pointer-events: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 100ms ease;
+}
+
+.gantt-tooltip-title {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.gantt-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gantt-tooltip-row span:last-child {
+  color: white;
+  font-weight: 500;
+}
+
+/* Empty gantt state */
+.gantt-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  color: var(--text-muted);
+  text-align: center;
+}
